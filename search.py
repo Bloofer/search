@@ -26,7 +26,25 @@ if(r.ok):
     print 'Result number : '+str(len(repoItem['items']))+'\n'
     for item in repoItem['items']:
       print ('issue#'+str(item['number'])+' '+item['title']).encode('utf-8')
-      print item['html_url']+'\n'
+      
+      if (item['closed_at']==None):
+        print 'still open'
+      else:
+        print 'closed at '+str(item['closed_at'])
+      
+      print item['html_url']
 
+      if (item['comments']==0):
+        print 'no comments\n'
+      else:
+        print str(item['comments'])+' comments'
+        com_r = requests.get(item['comments_url'], headers=headers)
+        if (com_r.ok):
+          comItem = json.loads(com_r.text or com_r.content)
+          for com in comItem:
+            print com['user']['login']+' : '+com['body']
+          print '\n'
+        else:\
+          print 'request fail com'
 else:
-  print 'request fail'
+  print 'request fail item'
