@@ -20,7 +20,7 @@ if(r.ok):
     print 'no result'
   else:
     # [print dump]
-    print json.dumps(repoItem, indent=4, sort_keys=True)
+    # print json.dumps(repoItem, indent=4, sort_keys=True)
 
     # [pretty print result]
     print 'Result number : '+str(len(repoItem['items']))+'\n'
@@ -42,7 +42,7 @@ if(r.ok):
         if (com_r.ok):
           comItem = json.loads(com_r.text or com_r.content)
           for com in comItem:
-            print com['user']['login']+' : '+com['body']
+            print (com['user']['login']+' : '+com['body']).encode('utf-8')
           print '\n'
         else:\
           print 'request fail com'
