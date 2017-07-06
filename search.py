@@ -20,10 +20,10 @@ if(r.ok):
     print 'no result'
   else:
     # [print dump]
-    # print json.dumps(repoItem, indent=4, sort_keys=True)
+    print json.dumps(repoItem, indent=4, sort_keys=True)
 
     # [pretty print result]
-    print 'Result number : '+str(repoItem['total_count'])+'\n'
+    print 'Result number : '+str(len(repoItem['items']))+'\n'
     for item in repoItem['items']:
       print ('issue#'+str(item['number'])+' '+item['title']).encode('utf-8')
       print item['html_url']+'\n'
