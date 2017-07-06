@@ -25,7 +25,7 @@ if(r.ok):
     # [pretty print result]
     print 'Result number : '+str(repoItem['total_count'])+'\n'
     for item in repoItem['items']:
-      print 'issue#'+str(item['number'])+' '+item['title']
+      print ('issue#'+str(item['number'])+' '+item['title']).encode('utf-8')
       print item['html_url']+'\n'
 
 else:
