@@ -5,11 +5,9 @@ import json
 
 url = 'https://api.github.com/search/'
 search_type = 'issues' #commits, issues etc.
-query_string = '?q=semantic conflict+label:bug+language:java'
-# q : search keywords. able to set keyword with multiple conditions(plain(keyword), repo, language, label)
-# ex) ?q=pep8+label:bug+repo:ropas/sparrow+language:c
-# sort : sort field (stars, forks, updated) / order : sort order (asc, desc)
-# ex) ?q=conflict&sort=stars&order=desc
+query_string = '?q=mergeconflict'
+# q : search keywords. able to set keyword with multiple conditions(plain(keyword), repo, language)
+# ex) ?q=pep8+repo:ropas/sparrow+language:c
 
 headers = {'Accept': 'application/vnd.github.v3+json'}
 
