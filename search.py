@@ -26,12 +26,12 @@ if(r.ok):
     print 'Result number : '+str(len(repoItem['items']))+'\n'
     for item in repoItem['items']:
       print ('issue#'+str(item['number'])+' '+item['title']).encode('utf-8')
-      
+
       if (item['closed_at']==None):
         print 'still open'
       else:
         print 'closed at '+str(item['closed_at'])
-      
+
       print item['html_url']
 
       if (item['comments']==0):
