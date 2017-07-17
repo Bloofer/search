@@ -1,6 +1,6 @@
 #search
 searching github repositories
-                                                                                
+<pre><code>                                                                                
                      `..`                             `...                      
                      ;###+,                         ,+###+                      
                      @######,                     .+@#####`                     
@@ -66,4 +66,4 @@ searching github repositories
                          `.....,,,,.,,,,.,,,..,,,......`                        
                             ```,,,,.,,,,.,,,..,,:..``                           
                                  ```..,,.,,,.```                                
-                                                                                
+</code></pre>                                                                                
