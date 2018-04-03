@@ -10,9 +10,10 @@ inum = 100
 while(inum>=100):
     inum = 0
     rnum += 1
+    sha_num = ''
     url = 'https://api.github.com/search/'
     search_type = 'commits' #commits, issues etc.
-    query_string = '?q=merge bug+Language:c+page='+str(rnum)+'&per_page=100'
+    query_string = '?q=extract method+Language:java+page='+str(rnum)+'&per_page=100'
     # q : search keywords. able to set keyword with multiple conditions(plain(keyword), repo, language, pages(default:30))
     # ex) ?q=pep8+repo:ropas/sparrow+language:c+page=2&per_page=100
 
@@ -39,23 +40,27 @@ while(inum>=100):
         inum = len(repoItem['items'])
         print ('Result number : '+str(inum)+'<br>', file = rst_file)
         for item in repoItem['items']:
-          print (('committer id : '+item['commit']['author']['name']).encode('utf-8'), file = rst_file)
+          if (sha_num!=item['commit']['tree']['sha']):
+            print (('committer id : '+item['commit']['author']['name']).encode('utf-8'), file = rst_file)
+            print (('commit# : '+item['commit']['tree']['sha']).encode('utf-8'), file = rst_file)
           # print (('commit log : '+item['commit']['message']).encode('utf-8'), file = rst_file)
           # log is hidden b.c. of many lines
-          print (('commit date : '+str(item['commit']['committer']['date'])).encode('utf-8'), file = rst_file)
-          print ('<a href="'+item['html_url']+'">commit link</a>', file = rst_file)
-          if (item['commit']['comment_count']==0):
-            print ('no comments<br>', file = rst_file)
-          else:
-            print (str(item['comments']['comment_count'])+' comments', file = rst_file)
-            com_r = requests.get(item['comments_url'], headers=headers)
-            if (com_r.ok):
-              comItem = json.loads(com_r.text or com_r.content)
-              for com in comItem:
-                print ((com['user']['login']+' : '+com['body']).encode('utf-8'), file = rst_file)
-              print ('<br>', file = rst_file)
-            else:
-              print ('request fail com', file = rst_file)
+            print (('commit date : '+str(item['commit']['committer']['date'])).encode('utf-8'), file = rst_file)
+            print ('<a href="'+item['commit']['tree']['url']+'">commit link</a>', file = rst_file)
+            print ('<br>', file = rst_file)
+          sha_num = item['commit']['tree']['sha'] 
+          #if (item['commit']['comment_count']==0):
+          #  print ('no comments<br>', file = rst_file)
+          #else:
+          #  print (str(item['comments']['comment_count'])+' comments', file = rst_file)
+          #  com_r = requests.get(item['comments_url'], headers=headers)
+          #  if (com_r.ok):
+          #    comItem = json.loads(com_r.text or com_r.content)
+          #    for com in comItem:
+          #      print ((com['user']['login']+' : '+com['body']).encode('utf-8'), file = rst_file)
+          #    
+          #  else:
+          #    print ('request fail com', file = rst_file)
     else:
       print ('request fail item', file = rst_file)
 
